@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #080d1a;
+  --bg-surface: rgba(255, 255, 255, 0.05);
+  --bg-sidebar: rgba(15, 23, 42, 0.8);
+  --border-main: rgba(255, 255, 255, 0.1);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.light {
+  --bg-main: #f8fafc;
+  --bg-surface: rgba(255, 255, 255, 0.9);
+  --bg-sidebar: rgba(255, 255, 255, 0.95);
+  --border-main: rgba(203, 213, 225, 0.6);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(59, 130, 246, 0.4) transparent;
+  }
+  *::-webkit-scrollbar { width: 5px; height: 5px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+
+  html { font-family: 'Inter', system-ui, sans-serif; }
+  body { 
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    @apply antialiased transition-colors duration-300;
+  }
+}
+
+@layer components {
+  /* Glass Card */
+  .glass-card {
+    background-color: var(--bg-surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-main);
+    box-shadow: var(--shadow-card);
+    @apply rounded-2xl transition-all duration-300;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply w-2.5 h-2.5 rounded-full inline-block;
+  }
+  .status-dot.online  { @apply bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)]; }
+  .status-dot.offline { @apply bg-red-400 shadow-[0_0_8px_rgba(239,68,68,0.7)]; }
+  .status-dot.warning { @apply bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.7)]; }
+
+  /* Nav link */
+  .nav-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+           transition-all duration-200 cursor-pointer;
+    color: var(--text-secondary);
+  }
+  .nav-link:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .light .nav-link:hover {
+    background-color: rgba(15, 23, 42, 0.05);
+  }
+  .nav-link.active {
+    color: var(--text-primary);
+    background-color: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600
+           text-white font-medium text-sm hover:from-blue-500 hover:to-cyan-500
+           transition-all duration-200 active:scale-95 shadow-glow-blue;
+  }
+  .btn-ghost {
+    @apply px-4 py-2 rounded-xl border font-medium text-sm transition-all duration-200;
+    border-color: var(--border-main);
+    color: var(--text-secondary);
+  }
+  .btn-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+  }
+  .light .btn-ghost:hover {
+    background-color: rgba(15, 23, 42, 0.05);
+  }
+
+  .btn-success {
+    @apply px-4 py-2 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600
+           text-white font-semibold text-sm hover:from-emerald-400 hover:to-teal-500
+           transition-all duration-300 active:scale-95 shadow-lg shadow-emerald-500/20
+           border border-emerald-400/20 flex items-center justify-center gap-2;
+  }
+  .btn-danger {
+    @apply px-4 py-2 rounded-xl bg-gradient-to-br from-rose-500 to-red-600
+           text-white font-semibold text-sm hover:from-rose-400 hover:to-red-500
+           transition-all duration-300 active:scale-95 shadow-lg shadow-rose-500/20
+           border border-rose-400/20 flex items-center justify-center gap-2;
+  }
+
+  .light .btn-success {
+    @apply shadow-emerald-500/15 border-transparent hover:shadow-emerald-500/30;
+  }
+  .light .btn-danger {
+    @apply shadow-rose-500/15 border-transparent hover:shadow-rose-500/30;
+  }
+
+  /* Metric label */
+  .metric-label {
+    @apply text-xs font-medium uppercase tracking-wider;
+    color: var(--text-muted);
+  }
+  .metric-value {
+    @apply text-3xl font-bold tracking-tight;
+    color: var(--text-primary);
+  }
+
+  /* Sidebar custom class */
+  .sidebar-bg {
+    background-color: var(--bg-sidebar);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border-main);
+  }
+}
